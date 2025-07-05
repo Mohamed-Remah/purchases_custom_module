@@ -1,0 +1,45 @@
+<odoo>
+    <record id="view_custom_assembly_order_form" model="ir.ui.view">
+        <field name="name">custom assembly order form</field>
+        <field name="model">custom.assembly.order</field>
+        <field name="arch" type="xml">
+            <form string="Assembly Order">
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="product_ids" widget="many2many_tags"/>
+                        <field name="quantities_str"/>
+                        <field name="location_id"/>
+
+                    </group>
+                    <separator string="Component Requirements"/>
+                    <field name="component_line_ids">
+                        <tree>
+                            <field name="product_id"/>
+                            <field name="required_qty"/>
+                            <field name="available_qty"/>
+                            <field name="missing_qty"/>
+                        </tree>
+                    </field>
+                    <!--                        <footer>-->
+                    <!--                            <button name="print_report" string="PDF" type="object" class="btn-primary"/>-->
+                    <!--                            <button name="print_report" string="PDF1" type="object" class="btn-primary"/>-->
+                    <!--                        </footer>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_custom_assembly_order" model="ir.actions.act_window">
+        <field name="name">Assembly Order</field>
+        <field name="res_model">custom.assembly.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_custom_assembly_order"
+            name="Assembly Order"
+            action="action_custom_assembly_order"
+            parent="purchase.menu_purchase_products"
+    />
+</odoo>
